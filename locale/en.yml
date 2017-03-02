@@ -5,6 +5,8 @@ flagrow-bazaar:
             field:
                 apiToken: API token
                 apiTokenDescription: In case the token is already present, you're good to go.
+                memoryBump: Increase memory
+                memoryBumpSwitch: Allow the increase
         nav:
             title: Bazaar
             description: The extension marketplace.

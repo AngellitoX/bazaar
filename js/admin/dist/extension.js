@@ -114,15 +114,17 @@ System.register('flagrow/bazaar/components/BazaarPage', ['flarum/Component', 'fl
 });;
 'use strict';
 
-System.register('flagrow/bazaar/components/BazaarSettingsModal', ['flarum/app', 'flarum/components/SettingsModal'], function (_export, _context) {
+System.register('flagrow/bazaar/components/BazaarSettingsModal', ['flarum/app', 'flarum/components/SettingsModal', 'flarum/components/Switch'], function (_export, _context) {
     "use strict";
 
-    var app, SettingsModal, BazaarSettingsModal;
+    var app, SettingsModal, Switch, BazaarSettingsModal;
     return {
         setters: [function (_flarumApp) {
             app = _flarumApp.default;
         }, function (_flarumComponentsSettingsModal) {
             SettingsModal = _flarumComponentsSettingsModal.default;
+        }, function (_flarumComponentsSwitch) {
+            Switch = _flarumComponentsSwitch.default;
         }],
         execute: function () {
             BazaarSettingsModal = function (_SettingsModal) {
@@ -134,6 +136,13 @@ System.register('flagrow/bazaar/components/BazaarSettingsModal', ['flarum/app', 
                 }
 
                 babelHelpers.createClass(BazaarSettingsModal, [{
+                    key: 'init',
+                    value: function init() {
+                        babelHelpers.get(BazaarSettingsModal.prototype.__proto__ || Object.getPrototypeOf(BazaarSettingsModal.prototype), 'init', this).call(this);
+
+                        this.memoryBump = m.prop(this.settings['flagrow.bazaar.memory_bump'] == 1);
+                    }
+                }, {
                     key: 'title',
                     value: function title() {
                         return app.translator.trans('flagrow-bazaar.admin.popup.title');
@@ -144,9 +153,12 @@ System.register('flagrow/bazaar/components/BazaarSettingsModal', ['flarum/app', 
                         return [m('div', { className: 'Form-group' }, [m('label', { for: 'bazaar-api-token' }, app.translator.trans('flagrow-bazaar.admin.popup.field.apiToken')), m('input', {
                             id: 'bazaar-api-token',
                             className: 'FormControl',
-                            bidi: this.setting('flagrow.bazaar.api_token'),
-                            disabled: this.setting('flagrow.bazaar.api_token')
-                        }), m('span', app.translator.trans('flagrow-bazaar.admin.popup.field.apiTokenDescription'))])];
+                            bidi: this.setting('flagrow.bazaar.api_token')
+                        }), m('span', app.translator.trans('flagrow-bazaar.admin.popup.field.apiTokenDescription'))]), m('div', { className: 'Form-group' }, [Switch.component({
+                            state: this.memoryBump(),
+                            children: app.translator.trans('flagrow-bazaar.admin.popup.field.memoryBump'),
+                            onchange: this.setting('flagrow.bazaar.memory_bump')
+                        }), m('span', app.translator.trans('flagrow-bazaar.admin.popup.field.memoryBumpDescription'))])];
                     }
                 }]);
                 return BazaarSettingsModal;
