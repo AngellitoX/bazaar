@@ -4,6 +4,7 @@ namespace Flagrow\Bazaar\Api\Controllers;
 
 use Flagrow\Bazaar\Api\Serializers\ExtensionSerializer;
 use Flagrow\Bazaar\Search\AbstractExtensionSearcher;
+use Flagrow\Bazaar\Search\FlagrowIOSearcher;
 use Flarum\Api\Controller\AbstractCollectionController;
 use Flarum\Api\UrlGenerator;
 use Flarum\Core\Access\AssertPermissionTrait;
@@ -29,7 +30,7 @@ class ListExtensionController extends AbstractCollectionController
      */
     protected $url;
 
-    public function __construct(AbstractExtensionSearcher $searcher, UrlGenerator $url)
+    public function __construct(FlagrowIOSearcher $searcher, UrlGenerator $url)
     {
         $this->searcher = $searcher;
         $this->url = $url;

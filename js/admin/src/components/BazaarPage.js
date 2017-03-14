@@ -2,6 +2,7 @@ import Component from 'flarum/Component';
 import ExtensionRepository from 'flagrow/bazaar/utils/ExtensionRepository';
 import ExtensionListItem from 'flagrow/bazaar/components/ExtensionListItem';
 import BazaarLoader from 'flagrow/bazaar/components/BazaarLoader';
+import Button from 'flarum/components/Button';
 
 export default class BazaarPage extends Component {
     init() {
@@ -16,6 +17,7 @@ export default class BazaarPage extends Component {
             <div className="ExtensionsPage Bazaar">
                 <div className="ExtensionsPage-header">
                     <div className="container">
+
                     </div>
                 </div>
 

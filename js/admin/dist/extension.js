@@ -74,10 +74,10 @@ System.register('flagrow/bazaar/components/BazaarLoader', ['flarum/Component', '
 });;
 'use strict';
 
-System.register('flagrow/bazaar/components/BazaarPage', ['flarum/Component', 'flagrow/bazaar/utils/ExtensionRepository', 'flagrow/bazaar/components/ExtensionListItem', 'flagrow/bazaar/components/BazaarLoader'], function (_export, _context) {
+System.register('flagrow/bazaar/components/BazaarPage', ['flarum/Component', 'flagrow/bazaar/utils/ExtensionRepository', 'flagrow/bazaar/components/ExtensionListItem', 'flagrow/bazaar/components/BazaarLoader', 'flarum/components/Button'], function (_export, _context) {
     "use strict";
 
-    var Component, ExtensionRepository, ExtensionListItem, BazaarLoader, BazaarPage;
+    var Component, ExtensionRepository, ExtensionListItem, BazaarLoader, Button, BazaarPage;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent.default;
@@ -87,6 +87,8 @@ System.register('flagrow/bazaar/components/BazaarPage', ['flarum/Component', 'fl
             ExtensionListItem = _flagrowBazaarComponentsExtensionListItem.default;
         }, function (_flagrowBazaarComponentsBazaarLoader) {
             BazaarLoader = _flagrowBazaarComponentsBazaarLoader.default;
+        }, function (_flarumComponentsButton) {
+            Button = _flarumComponentsButton.default;
         }],
         execute: function () {
             BazaarPage = function (_Component) {
