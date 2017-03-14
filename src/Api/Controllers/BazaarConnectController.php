@@ -51,9 +51,9 @@ class BazaarConnectController implements ControllerInterface
         $response = $this->api->get('bazaar/connect');
 
         if ($response->getStatusCode() === 201) {
-            $clientId = $response->getHeader('Client-Id');
-            $clientSecret = $response->getHeader('Client-Secret');
-            $redirect = $response->getHeader('Client-Redirect');
+            $clientId = $this->processHeader('Client-Id', $response);
+            $clientSecret = $this->processHeader('Client-Secret', $response);
+            $redirect = $this->processHeader('Client-Redirect', $response);
 
             $this->validator->assertValid(compact('clientId', 'clientSecret', 'redirect'));
 
@@ -65,5 +65,24 @@ class BazaarConnectController implements ControllerInterface
         }
 
         throw new PermissionDeniedException('Could not create oauth client');
+    }
+
+    /**
+     * @param $name
+     * @param $response
+     */
+    protected function processHeader($name, $response)
+    {
+        $header = $response->getHeader($name);
+
+        if (!count($header)) {
+            return;
+        }
+
+        if (count($header)) {
+            return $header[0];
+        }
+
+        return $header;
     }
 }

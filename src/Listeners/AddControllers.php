@@ -2,13 +2,16 @@
 
 namespace Flagrow\Bazaar\Listeners;
 
+use Flagrow\Bazaar\Api\Controllers\BazaarCallbackController;
+use Flagrow\Bazaar\Api\Controllers\BazaarConnectController;
 use Flagrow\Bazaar\Api\Controllers\CreateExtensionController;
 use Flagrow\Bazaar\Api\Controllers\ListExtensionController;
 use Flagrow\Bazaar\Api\Controllers\UninstallExtensionController;
 use Flarum\Event\ConfigureApiRoutes;
+use Flarum\Event\ConfigureForumRoutes;
 use Illuminate\Events\Dispatcher;
 
-class AddApiControllers
+class AddControllers
 {
     /**
      * Subscribes to the Flarum api routes configuration event.
@@ -18,6 +21,7 @@ class AddApiControllers
     public function subscribe(Dispatcher $events)
     {
         $events->listen(ConfigureApiRoutes::class, [$this, 'configureApiRoutes']);
+        $events->listen(ConfigureForumRoutes::class, [$this, 'configureForumRoutes']);
     }
 
     /**
@@ -46,6 +50,23 @@ class AddApiControllers
             '/bazaar/extensions/{id}',
             'bazaar.extensions.delete',
             UninstallExtensionController::class
+        );
+
+        // Connect
+        $event->get(
+            '/bazaar/connect',
+            'bazaar.connect',
+            BazaarConnectController::class
+        );
+    }
+
+    public function configureForumRoutes(ConfigureForumRoutes $event)
+    {
+        // Connect callback
+        $event->get(
+            '/bazaar/auth/callback',
+            'bazaar.connect.callback',
+            BazaarCallbackController::class
         );
     }
 }

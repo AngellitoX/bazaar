@@ -17,6 +17,8 @@ flagrow-bazaar:
                 uninstall: Uninstall
                 enable: Enable
                 disable: Disable
+                connect: Connect
+                connect_info: Allows status dashboards of all your Flarum installations and opens up community features.
             extension:
                 installed: Extension is installed
                 enabled: Extension is enabled
